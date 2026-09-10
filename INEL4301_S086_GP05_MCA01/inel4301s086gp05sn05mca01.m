@@ -50,7 +50,7 @@ gmax=max(g);                         %Maximum value of sum
 g=transpose((1/gmax)*g);             %Normalized interference signal
 %********************************************************************
 %*********************SIGNALS AND SYSTEMS MODELING*******************
-fc=9900;                        %Carrier frequency
+fc=8640;                        %Carrier frequency
 c=transpose((cos(2*pi*fc*tq))); %Carrier signal
 wsig=dsigL(1:Nq,1);             %Wanted input signal
 xm=wsig+g;                      %Sum of wanted and unwanted signals
