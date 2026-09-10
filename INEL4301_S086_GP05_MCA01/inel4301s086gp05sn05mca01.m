@@ -4,7 +4,7 @@
 %Name of Student, sn02, DTMF_WORD, DITS, %XX of Contribution
 %Name of Student, sn03, DTMF_WORD, DITS, %XX of Contribution
 %Name of Student, sn04, DTMF_WORD, DITS, %XX of Contribution
-%Ramos Ramos Cristian, sn05, dtmfau, DITS, %20 of Contribution
+%Cristian Ramos Ramos, sn05, dtmfau, DITS: 1 and 5, %20 of Contribution
 %**************************Prof. D. Rodriguez***********************
 %*********DSB-SC COMMUNICATIONS SYSTEMS AND GAUSSIAN NOISE**********
 %*********ANALOG AND DIGITAL COMMUNICATIONS SIMULATIONS*************
