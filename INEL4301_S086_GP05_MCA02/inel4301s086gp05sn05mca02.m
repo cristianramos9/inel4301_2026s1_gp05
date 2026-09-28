@@ -1,10 +1,10 @@
-%inel4301s000gp00sn00mca02
+%inel4301s086gp05sn05mca02
 %Prof. Domingo Antonio Rodriguez
 %Name of Student, sn01, DTMF_WORD, DITS, %XX of Contribution
 %Name of Student, sn02, DTMF_WORD, DITS, %XX of Contribution
 %Name of Student, sn03, DTMF_WORD, DITS, %XX of Contribution
 %Name of Student, sn04, DTMF_WORD, DITS, %XX of Contribution
-%Name of Student, sn05, DTMF_WORD, DITS, %XX of Contribution
+%Cristian Ramos Ramos, sn05, dtmfau, DITS, %20 of Contribution
 %**************************Prof. D. Rodriguez***********************
 %*********DSB-SC COMMUNICATIONS SYSTEMS AND GAUSSIAN NOISE**********
 %*********ANALOG AND DIGITAL COMMUNICATIONS SIMULATIONS*************
@@ -18,7 +18,7 @@ disp('******************************')
 %*******************************************************************
 %********************Wanted Signal Input/Output*********************
 %*******************************************************************
-[sig,Fs]=audioread('dtmfad.wav');  %Get overall sampling frequency
+[sig,Fs]=audioread('dtmfau.wav');  %Get overall sampling frequency
 save dsig.txt sig -ascii               %Save signal as dsig.txt file
 load -ascii dsig.txt;                %Load ascii file dsig.txt
 wsiz=length(dsig);                   %Get the length of the "dsig" signal
@@ -50,7 +50,7 @@ gmax=max(g);                         %Maximum value of sum
 g=transpose((1/gmax)*g);             %Normalized interference signal
 %********************************************************************
 %*********************SIGNALS AND SYSTEMS MODELING*******************
-fc=9900;                        %Carrier frequency
+fc=8640;                        %Carrier frequency
 c=transpose((cos(2*pi*fc*tq))); %Carrier signal
 wsig=dsigL(1:Nq,1);             %Wanted input signal
 xm=wsig+g;                      %Sum of wanted and unwanted signals
@@ -71,7 +71,7 @@ fayci=-(Fs/2):fryci:+(Fs/2)-fryci;  %Frequency axis of wanted signal
 %*************************CHANNEL NOISE*******************************
 nsig=randn(size(yci));          %Generation of AWGN signal: noise signal
 nnsig=(1/max(abs(nsig)))*nsig;  %Normalized noise signal
-nATT=sqrt(1/24000);                %Noise attenuation about -44 dB SNR
+nATT=sqrt(1/2.4);                %Noise attenuation about -44 dB SNR
 nsig=nATT*nnsig;                %Attenuated noise present in the channel
 %*********************************************************************
 %*************************CHANNEL OUTPUT******************************
@@ -81,7 +81,7 @@ cn=transpose((cos(2*pi*fc*tqn)));   %New carrier signal
 yd=yco.*(2*cn);                     %Demodulation stage
 %*********************************************************************
 %*************************LOW-PASS FILTER*****************************
-Nlow=663;              %Designed low-pass filter order
+Nlow=1323;              %Designed low-pass filter order
 Wlow=(2*fV)/Fs;         %Normalized cut-off frequency
 hlow=fir1(Nlow-1,Wlow); %FIR low-pass impulse response function
 taxis_hlow=0:Ts:(length(hlow)-1)*Ts;
