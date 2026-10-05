@@ -4,7 +4,7 @@
 %Name of Student, sn02, DTMF_WORD, DITS, %XX of Contribution
 %Name of Student, sn03, DTMF_WORD, DITS, %XX of Contribution
 %Name of Student, sn04, DTMF_WORD, DITS, %XX of Contribution
-%Cristian Ramos Ramos, sn05, dtmfau, DITS, %20 of Contribution
+%Cristian Ramos Ramos, sn05, dtmfau, 1 and 5, %20 of Contribution
 %**************************Prof. D. Rodriguez***********************
 %*********DSB-SC COMMUNICATIONS SYSTEMS AND GAUSSIAN NOISE**********
 %*********ANALOG AND DIGITAL COMMUNICATIONS SIMULATIONS*************
@@ -71,7 +71,7 @@ fayci=-(Fs/2):fryci:+(Fs/2)-fryci;  %Frequency axis of wanted signal
 %*************************CHANNEL NOISE*******************************
 nsig=randn(size(yci));          %Generation of AWGN signal: noise signal
 nnsig=(1/max(abs(nsig)))*nsig;  %Normalized noise signal
-nATT=sqrt(1/2.4);                %Noise attenuation about -44 dB SNR
+nATT=sqrt(1/2.4);                %Noise attenuation about -4 dB SNR
 nsig=nATT*nnsig;                %Attenuated noise present in the channel
 %*********************************************************************
 %*************************CHANNEL OUTPUT******************************
