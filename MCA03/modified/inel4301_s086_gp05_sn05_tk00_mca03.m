@@ -66,12 +66,13 @@ xlabel('Time (s)'); ylabel('Amplitude'); title('Mid-rise quantized signal');
 MSE = mean((xm_cons-X_Quantized).^2);
 
 % Cristian Ramos
-arithmetic_mean = mean(x)
-total_sig_energy = sum(abs(x).^2)
-avg_sig_power = mean(abs(x).^2)
-rms_amplitude = sqrt(mean(abs(x).^2))
-variance_normalized = var(x,1)
-norm = norm(x,2)
+x = 1;
+arithmetic_mean = mean(x);
+total_sig_energy = sum(abs(x).^2);
+avg_sig_power = mean(abs(x).^2);
+rms_amplitude = sqrt(mean(abs(x).^2));
+variance_normalized = var(x,1);
+norm = norm(x,2);
 
 fprintf('\nInput range: [%.12g, %.12g]\n',Xmin,Xmax);
 fprintf('N = %d, bits/sample = %d, Delta = %.12g\n',N,round(log2(N)),Delta);
@@ -80,5 +81,13 @@ fprintf('MSE = %.12g\n',MSE);
 if Delta > 0
     fprintf('Highest reconstruction level: %.12g\n',Xmax-Delta/2);
 end
+
+% CSV File
+title = ["Signal" "SampleCount" "SamplingFrequency_Hz" "QuantizationLevels" "BitsPerSample" "QuantizationStep" "ArithmeticMean" "TotalEnergy" "AveragePower" "RMS" "Variance" "EuclideanNorm" "MSE"];
+original = ['Original', length_of_xm, Fs];
+modified = [];
+table = [title; original; modified];
+csvwrite('temp.csv', table);
+
 Ask = input('Play quantized audio? 1=yes, other=no: ');
 if isequal(Ask,1), sound(X_Quantized,Fs); end
