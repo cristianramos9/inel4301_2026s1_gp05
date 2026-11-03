@@ -64,6 +64,15 @@ xlabel('Time (s)'); ylabel('Amplitude'); title('Original signal');
 subplot(2,1,2); plot(time,X_Quantized,'r'); grid on;
 xlabel('Time (s)'); ylabel('Amplitude'); title('Mid-rise quantized signal');
 MSE = mean((xm_cons-X_Quantized).^2);
+
+% Cristian Ramos
+arithmetic_mean = mean(x)
+total_sig_energy = sum(abs(x).^2)
+avg_sig_power = mean(abs(x).^2)
+rms_amplitude = sqrt(mean(abs(x).^2))
+variance_normalized = var(x,1)
+norm = norm(x,2)
+
 fprintf('\nInput range: [%.12g, %.12g]\n',Xmin,Xmax);
 fprintf('N = %d, bits/sample = %d, Delta = %.12g\n',N,round(log2(N)),Delta);
 fprintf('Output range: [%.12g, %.12g]\n',min(X_Quantized),max(X_Quantized));
