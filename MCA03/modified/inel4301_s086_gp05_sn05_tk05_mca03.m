@@ -1,5 +1,5 @@
-% inel4301_syyy_gpzz_sn00_tk00_mca03
-% Modified by:
+% inel4301_s086_gp05_sn05_tk05_mca03
+% Modified by: Cristian N. Ramos Ramos
 % Original by: Prof. Domingo Antonio Rodriguez
 % CUANTIZADOR_MIDRISE - N-level uniform mid-rise quantizer.
 % MATLAB R2020b or later. No specialized toolboxes required.
@@ -66,7 +66,8 @@ xlabel('Time (s)'); ylabel('Amplitude'); title('Mid-rise quantized signal');
 MSE = mean((xm_cons-X_Quantized).^2);
 
 % Cristian Ramos
-x = 1;
+% Fundamental signal metric
+x = xm;
 arithmetic_mean = mean(x);
 total_sig_energy = sum(abs(x).^2);
 avg_sig_power = mean(abs(x).^2);
@@ -84,10 +85,26 @@ end
 
 % CSV File
 title = ["Signal" "SampleCount" "SamplingFrequency_Hz" "QuantizationLevels" "BitsPerSample" "QuantizationStep" "ArithmeticMean" "TotalEnergy" "AveragePower" "RMS" "Variance" "EuclideanNorm" "MSE"];
-original = ['Original', length_of_xm, Fs];
-modified = [];
-table = [title; original; modified];
-csvwrite('temp.csv', table);
+%original = ['Original', length_of_xm, Fs];
+modified = [length_of_xm arithmetic_mean total_sig_energy avg_sig_power rms_amplitude variance_normalized norm; 
+	length_of_xm arithmetic_mean total_sig_energy avg_sig_power rms_amplitude variance_normalized norm];
+table = [modified; modified];
+row=2;
+col=1;
+%csvwrite('inel4301_s086_gp05_sn05_tk05_N128_mca03.csv', modified);
+csvwrite('temp0.csv', modified, 1, 1);
+csvwrite('temp0.csv', modified, 5, 6);
+
+a = 'abc';
+d = 'def';
+g = 10;
+h = "39";
+
+tres = [a d g h];
+
+an = [d d h; a g h];
+
+writematrix(an, "temp_1.csv");
 
 Ask = input('Play quantized audio? 1=yes, other=no: ');
 if isequal(Ask,1), sound(X_Quantized,Fs); end
