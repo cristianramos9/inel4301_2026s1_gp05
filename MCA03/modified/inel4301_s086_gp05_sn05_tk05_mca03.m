@@ -50,15 +50,16 @@ if Xmax == Xmin
     % Degenerate signal: avoid dividing by zero.
     Delta = 0;
     index = zeros(size(xm_cons));
-    X_Quantized = xm_cons;		% Quantized signal: xm_cons
+    X_Quantized = xm_cons;		% Quantized signal: X_Quantized
 else
     Delta = (Xmax-Xmin)/N;
     index = floor((xm_cons-Xmin)/Delta);
     index = min(max(index,0),N-1); % Includes Xmax in the last cell.
-    X_Quantized = Xmin + (index+0.5)*Delta;		% Quantized signal: xm_cons
+    X_Quantized = Xmin + (index+0.5)*Delta;		% Quantized signal: X_Quantized 
 end
 time = (0:length_of_xm-1)'/Fs;
 figure('Name','Mid-rise uniform quantization');
+
 subplot(2,1,1); plot(time,xm_cons); grid on;
 xlabel('Time (s)'); ylabel('Amplitude'); title('Original signal');
 subplot(2,1,2); plot(time,X_Quantized,'r'); grid on;
@@ -90,6 +91,7 @@ q_rms_amplitude = sqrt(mean(abs(y).^2));
 q_variance = var(y,1);
 q_eucl_norm = norm(y,2);
 
+% Compute MSE for six quantization values:
 q_mse_n4 = 0.2;
 q_mse_n8 = 0.4;
 q_mse_n16 = 0.5;
@@ -98,8 +100,7 @@ q_mse_n64 = 0.7;
 q_mse_n128 = MSE;
 
 
-
-% Mid-rise quantizer MSE graph
+% Plot: Mid-rise quantizer MSE graph
 q_levels = [4 8 16 32 64 128];
 q_mse_levels = [q_mse_n4 q_mse_n8 q_mse_n16 q_mse_n32 q_mse_n64 q_mse_n128];
 q_mse_title = sprintf('Mid-rise quantizer MSE (%d samples)', length_of_xm);
@@ -128,22 +129,18 @@ end
 % variance	-	Variance
 % eucl_norm	-	EuclideanNorm
 % MSE		-	MSE
+
+% First row
 r0_title = ["Signal" "SampleCount" "SamplingFrequency_Hz" "QuantizationLevels" "BitsPerSample" "QuantizationStep" "ArithmeticMean" "TotalEnergy" "AveragePower" "RMS" "Variance" "EuclideanNorm" "MSE"];
+% Second row
 r1_original = ["Original" length_of_xm Fs orig_N orig_bits_per_sample orig_delta arithmetic_mean total_sig_energy avg_sig_power rms_amplitude variance eucl_norm orig_mse];
+% Third row
 r2_modified = ["MidRiseQuantized" length_of_xm Fs N q_bits_per_sample Delta q_arithmetic_mean q_total_sig_energy q_avg_sig_power q_rms_amplitude q_variance q_eucl_norm MSE];
 
-%r1_original = [01 length_of_xm Fs N bits_per_sample Delta arithmetic_mean total_sig_energy avg_sig_power rms_amplitude variance eucl_norm MSE];
-%r2_modified = [02 length_of_xm Fs N bits_per_sample q_delta q_arithmetic_mean q_total_sig_energy q_avg_sig_power q_rms_amplitude q_variance q_eucl_norm MSE];
-%csvwrite('inel4301_s086_gp05_sn05_tk05_N128_mca03.csv', modified);
-
+% All rows in single matrix
 csv_output = [r0_title; r1_original; r2_modified];
-%csv_output = [r1_original; r2_modified];
-%csv_strings = ['Original'; 'MidRiseQuantized'];
-%csv_t = [r0_title; r1_original];
-
+% Create CSV file
 writematrix(csv_output, 'inel4301_s086_gp05_sn05_tk05_N128_mca03.csv');
-%writematrix(csv_output, 'inel4301_s086_gp05_sn05_tk05_N128_mca03.csv');
-%dlmwrite('inel4301_s086_gp05_sn05_tk05_N128_mca03.csv', csv_output);
 
 Ask = input('Play quantized audio? 1=yes, other=no: ');
 if isequal(Ask,1), sound(X_Quantized,Fs); end
