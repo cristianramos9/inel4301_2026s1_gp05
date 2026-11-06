@@ -1,0 +1,3 @@
+Signal,SampleCount,SamplingFrequency_Hz,QuantizationLevels,BitsPerSample,QuantizationStep,ArithmeticMean,TotalEnergy,AveragePower,RMS,Variance,EuclideanNorm,MSE
+Original,2205,44100,NaN,NaN,NaN,-0.001187,549.7829,0.24933,0.49933,0.24933,23.4474,NaN
+MidRiseQuantized,2205,44100,128,7,0.015621,-0.0012765,549.7312,0.24931,0.49931,0.24931,23.4463,2.0038e-05
